@@ -21,8 +21,6 @@ function letterCombinations(digits) {
   function findLetter(result, input, r) {
     if (r === input.length) {
       finalResult = result;
-
-      return result;
     }
 
     if (result.length === 0 && r === 0) {
