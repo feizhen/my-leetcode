@@ -1,57 +1,28 @@
-function isExist(founded, finalResult) {
-  let exist = false;
-  finalResult.forEach(cur => {
-    if (exist) {
-      return;
-    }
-    let allEqual = true;
-    for (let i = 0; i < cur.length; i++) {
-      if (cur[i] !== founded[i]) {
-        allEqual = false;
-      }
-    }
-
-    exist = allEqual;
-  });
-  return exist;
-}
-
-function uniq(array) {
-  const result = [];
-  array.forEach(cur => {
-    if (!isExist(cur, result)) {
-      result.push(cur);
-    }
-  });
-  return result;
-}
-
 var combinationSum = function(candidates, target) {
-  const finalResult = [];
+  candidates.sort();
+  var result = [];
+  var len = candidates.length;
 
-  findCombination(candidates, target, []);
-
-  return uniq(finalResult);
-
-  function findCombination(candidates, target, founded) {
-    if (target === 0) {
-      finalResult.push(founded.sort());
-
+  function constructSubset(i, sum, temp) {
+    if (sum === target) {
+      result.push(temp);
       return;
     }
 
-    for (let i = 0; i < candidates.length; i++) {
-      const result = founded.slice();
-      const current = candidates[i];
-      let temp = target;
-      if (current <= temp) {
-        result.push(current);
-
-        temp = temp - current;
-        findCombination(candidates, temp, result);
-      }
+    if (sum > target || i >= len) {
+      return;
     }
+
+    // 包含当前元素
+    constructSubset(i, sum + candidates[i], temp.concat([candidates[i]]));
+
+    // 不包含当前元素
+    constructSubset(i + 1, sum, temp);
   }
+
+  constructSubset(0, 0, []);
+
+  return result;
 };
 
 combinationSum([2, 3, 6, 7], 7);
