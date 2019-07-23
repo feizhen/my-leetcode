@@ -35,5 +35,41 @@ var permute = function(nums) {
   return result;
 };
 
+var permute2 = function(nums) {
+  var result = [];
+  var cache = new Map();
+
+  function combination(current, subset, temp) {
+    temp.push(current);
+
+    if (subset.length === 0 && cache[temp.toString()] !== true) {
+      result.push(temp);
+      cache[temp.toString()] = true;
+      return;
+    }
+
+    for (let i = 0; i < subset.length; i++) {
+      let next_current = subset[i];
+      let next_subset = subset.slice();
+      next_subset.splice(i, 1);
+      let next_temp = temp.slice();
+      combination(next_current, next_subset, next_temp);
+    }
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    let current = nums[i];
+    let array = nums.slice();
+    array.splice(i, 1);
+    combination(current, array, []);
+  }
+
+  console.log(result);
+
+  return result;
+};
+
 permute([1, 2, 3, 4]);
+
 permute([0, 1]);
+permute2([1, 1, 2]);
