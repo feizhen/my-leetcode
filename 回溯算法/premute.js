@@ -69,7 +69,9 @@ var permute2 = function(nums) {
   return result;
 };
 
-permute([1, 2, 3, 4]);
+// permute([1, 2, 3, 4]);
 
-permute([0, 1]);
-permute2([1, 1, 2]);
+// permute([0, 1]);
+// permute2([1, 1, 2]);
+
+permute([1, 2, 3]);
