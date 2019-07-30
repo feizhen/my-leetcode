@@ -15,7 +15,7 @@ var minPathSum = function(grid) {
     p.push(column);
   }
 
-  console.log("initial p", p);
+  //   console.log("initial p", p);
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
@@ -29,7 +29,7 @@ var minPathSum = function(grid) {
     }
   }
 
-  console.log("complete p", p);
+  //   console.log("complete p", p);
 
   return p[m - 1][n - 1];
 };
